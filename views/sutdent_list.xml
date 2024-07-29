@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<odoo>
+
+    <!--    Kanban View -->
+    <record id="Student_list_kanban" model="ir.ui.view">
+        <field name="name">Student List</field>
+        <field name="model">student.list</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="name"/>
+                <field name="institude"/>
+                <field name="dept"/>
+                <field name="dob"/>
+                <field name="age"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div>
+                                <strong>Name:</strong>
+                                <field name="name"/>
+                            </div>
+                            <div>
+                                <strong>Institude:</strong>
+                                <field name="institude"/>
+                            </div>
+                            <div>
+                                <strong>Department:</strong>
+                                <field name="dept"/>
+                            </div>
+                            <div>
+                                <strong>Date of Birth:</strong>
+                                <field name="dob"/>
+                            </div>
+                            <div>
+                                <strong>AGE:</strong>
+                                <field name="age"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!--    Tree View -->
+    <record model="ir.ui.view" id="student_list_tree">
+        <field name="name">Student List</field>
+        <field name="model">student.list</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="institude"/>
+                <field name="dept"/>
+                <field name="dob"/>
+                <field name="image"/>
+            </tree>
+        </field>
+    </record>
+
+    <!--Form View -->
+    <record model="ir.ui.view" id="student_list_form">
+        <field name="name">Student List</field>
+        <field name="model">student.list</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                        </group>
+                        <group>
+                            <field name="institude"/>
+                            <field name="dept"/>
+                        </group>
+                        <group>
+                            <field name="fathers_name"/>
+                            <field name="mothers_name"/>
+                            <newline/>
+                        </group>
+                        <group>
+                            <field name="dob"/>
+                            <field name="age" readonly="1" force_save="1"/>
+                            <field name="image" widget="image" style="height: 50px; width: 50px;"/>
+                        </group>
+                    </group>
+
+                </sheet>
+
+            </form>
+        </field>
+    </record>
+
+    <!--Main View-->
+    <record model="ir.actions.act_window" id="action_student_info">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Student Information</field>
+        <field name="res_model">student.list</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                Create New Student
+            </p>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="action_student_department_info">
+        <field name="type">ir.actions.act_window</field>
+        <field name="name">Department Information</field>
+        <field name="res_model">student.dept</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">
+                Create New Department
+            </p>
+        </field>
+    </record>
+    <menuitem
+            id="student_info"
+            name="Student Info"/>
+
+    <menuitem
+            id="new_student_info"
+            name="Student Info Add"
+            parent="student_info"
+            action="action_student_info"/>
+    <menuitem
+            id="student_department_info"
+            name="Department Information"
+            parent="student_info"
+            action="action_student_department_info"/>
+
+
+</odoo>
